@@ -1,0 +1,38 @@
+﻿@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<PokemonCardz.Models.Pokemon>
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="text-center">
+		<h1 class="display-4">Your cards</h1>
+        <h3>(by experience)</h3>
+		<div class="container">
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Base Experience
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BaseExperience)
+        </td>
+    </tr>
+}
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+</body>
